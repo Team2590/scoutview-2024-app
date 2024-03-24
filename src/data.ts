@@ -4,8 +4,8 @@ export const defaultData: Data = {
     matchNum: 0,
     teamNum: 0,
     scoutName: '',
-    startingPos: '',
-    leaveWing: '',
+    startingPos: null,
+    leaveWing: null,
     spkrMade_atn: 0,
     spkrMissed_atn: 0,
     ampMade_atn: 0,
@@ -14,12 +14,12 @@ export const defaultData: Data = {
     spkrMissed_tp: 0,
     ampMade_tp: 0,
     ampMissed_tp: 0,
-    coopertition: '',
-    climbLvl: '',
-    trap: 0,
-    traverse: '',
-    twoRobot: '',
-    droppedHit: ''
+    coopertition: null,
+    climbLvl: null,
+    trap: null,
+    traverse: null,
+    twoRobot: null,
+    droppedHit: null
 }
 
 export const dataAtom = atomWithStorage('nemesis-data', defaultData)

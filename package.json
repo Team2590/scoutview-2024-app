@@ -11,12 +11,14 @@
   },
   "dependencies": {
     "@capacitor/android": "5.7.4",
+    "@capacitor/assets": "^3.0.4",
     "@capacitor/cli": "^5.7.4",
     "@capacitor/core": "^5.7.4",
     "bootstrap": "^5.3.3",
     "jotai": "^2.7.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-qr-code": "^2.0.12"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

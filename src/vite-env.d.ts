@@ -3,8 +3,8 @@ type Data = {
     matchNum: number
     teamNum: number
     scoutName: string
-    startingPos: "A" | "B" | "C" | "D" | ""
-    leaveWing: boolean | ""
+    startingPos: "A" | "B" | "C" | "D" | null
+    leaveWing: "true" | "false" | null
     spkrMade_atn: number
     spkrMissed_atn: number
     ampMade_atn: number
@@ -13,10 +13,10 @@ type Data = {
     spkrMissed_tp: number
     ampMade_tp: number
     ampMissed_tp: number
-    coopertition: boolean | ""
-    climbLvl: "Parked" | "Climb" | "Mic" | "N/A" | ""
-    trap: number
-    traverse: boolean | ""
-    twoRobot: boolean | ""
-    droppedHit: boolean | ""
+    coopertition: "true" | "false" | null
+    climbLvl: "Parked" | "Climb" | "Mic" | "N/A" | null
+    trap: number | null
+    traverse: "true" | "false" | null
+    twoRobot: "true" | "false" | null
+    droppedHit: "true" | "false" | null
 }

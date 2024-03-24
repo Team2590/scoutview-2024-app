@@ -2,6 +2,7 @@ $primary: #dc3545;
 $secondary: #ff5555;
 $info: #850505;
 $success: #28a745;
+$enable-negative-margins: true;
 
 @import '../../node_modules/bootstrap/scss/functions';
 @import '../../node_modules/bootstrap/scss/variables';
@@ -11,9 +12,5 @@ $custom-colors: (
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
-
-// * {
-//     outline: 1px solid limegreen !important;
-// }
 
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
