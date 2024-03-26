@@ -7,6 +7,8 @@ import PlusMinus from '../components/PlusMinus'
 export default function Autonomous() {
     const [cols, setCols] = useState(true)
 
+    const isMobile = window.innerWidth < 768
+
     const changeButtonOrientation = () => {
         if (window.innerWidth < 1080) {
             setCols(false)
@@ -34,14 +36,10 @@ export default function Autonomous() {
             <div className='container'>
                 <img src='field.jpg' alt='Field Image' className='d-block mx-auto mt-5 img-fluid' />
                 <div className={`mt-4 ${cols ? 'row' : ''}`}>
-                    <div className='col text-center'>
-                        <label htmlFor='scout-name' className='form-label'>Scout Name</label>
-                        <input type='text' className='form-control' id='scout-name' />
-                    </div>
-                    <div className={cols ? 'col-6' : 'mx-auto my-4'}>
+                    <div className='col mx-auto'>
                         <SelectInput property='startingPos' label='Starting Position' options={['A', 'B', 'C', 'D']} />
                     </div>
-                    <div className='col'>
+                    <div className='col mx-auto mt-md-4 mt-lg-0'>
                         <YesNo property='leaveWing' label='Leave Start Line?' />
                     </div>
                 </div>

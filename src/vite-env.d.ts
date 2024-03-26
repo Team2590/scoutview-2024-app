@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 type Data = {
-    matchNum: number
-    teamNum: number
+    matchNum: number | ''
+    teamNum: number | ''
     scoutName: string
     startingPos: "A" | "B" | "C" | "D" | null
     leaveWing: "true" | "false" | null

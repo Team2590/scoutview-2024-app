@@ -18,8 +18,8 @@ export default function App() {
 		<>
 			<GetMatch />
 			<Autonomous />
-			<Teleoperated />
-			<Endgame />
+			{/* <Teleoperated /> */}
+			{/* <Endgame /> */}
 			<Export />
 		</>
 	)
