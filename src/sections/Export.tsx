@@ -52,19 +52,6 @@ export default function Export() {
 
     return (
         <SectionWrapper label='Export'>
-            <div className='container'>
-                <div className='row mt-5'>
-                    <div className='col'>
-                        <YesNo property='traverse' label='Traverse Chain?' />
-                    </div>
-                    <div className='col'>
-                        <YesNo property='twoRobot' label='Two Robots?' />
-                    </div>
-                </div>
-                <div className='mt-md-5 mt-lg-0'>
-                    <YesNo property='droppedHit' label='Dropped When Hit?' />
-                </div>
-            </div>
             <div className='mx-auto text-center mt-5'>
                 <QRCode
                     value={JSON.stringify(exportData)}
@@ -78,7 +65,7 @@ export default function Export() {
                 <CheckData />
             </div>
             <button
-                className='btn btn-success rounded-0 w-100 text-white py-5 mt-5'
+                className='btn btn-success rounded-0 w-100 text-white py-5 position-absolute bottom-0'
                 style={{ fontSize: '1.75rem' }}
                 onClick={resetData}
             >

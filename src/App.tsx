@@ -22,7 +22,6 @@ export default function App() {
 			<Teleoperated />
 			<Endgame />
 			<Export />
-			<CheckData />
 		</>
 	)
 }

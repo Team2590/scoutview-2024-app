@@ -1,8 +1,8 @@
 import { atomWithStorage } from "jotai/utils"
 
 export const defaultData: Data = {
-    matchNum: 0,
-    teamNum: 0,
+    matchNum: '',
+    teamNum: '',
     scoutName: '',
     startingPos: null,
     leaveWing: null,
