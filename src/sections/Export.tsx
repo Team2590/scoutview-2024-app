@@ -5,15 +5,10 @@ import { defaultData } from './../data'
 import SectionWrapper from '../components/SectionWrapper'
 import QRCode from 'react-qr-code'
 import YesNo from '../components/YesNo'
+import CheckData from '../components/CheckData'
 
-export default function Export() {
-    const [data, setData] = useAtom(dataAtom)
-
-    const resetData = () => {
-        setData({ ...defaultData, scoutName: data.scoutName, matchNum: '', teamNum: '' })
-    }
-
-    const exportData = [
+export const generateExportArray = (data: Data) => {
+    return [
         data.matchNum,
         data.teamNum,
         data.startingPos,
@@ -37,6 +32,23 @@ export default function Export() {
         null,
         data.scoutName
     ]
+}
+
+export default function Export() {
+    const [data, setData] = useAtom(dataAtom)
+
+    const storeData = () => {
+        const pastData = localStorage.getItem('nemesis-past-data') ? JSON.parse(localStorage.getItem('nemesis-past-data')!) : []
+        pastData.push(data)
+        localStorage.setItem('nemesis-past-data', JSON.stringify(pastData))
+    }
+
+    const resetData = () => {
+        storeData()
+        setData({ ...defaultData, scoutName: data.scoutName, matchNum: '', teamNum: '' })
+    }
+
+    const exportData = generateExportArray(data)
 
     return (
         <SectionWrapper label='Export'>
@@ -61,6 +73,9 @@ export default function Export() {
                     size={384}
                     style={{ border: '20px solid white' }}
                 />
+            </div>
+            <div className='text-center mt-3'>
+                <CheckData />
             </div>
             <button
                 className='btn btn-success rounded-0 w-100 text-white py-5 mt-5'

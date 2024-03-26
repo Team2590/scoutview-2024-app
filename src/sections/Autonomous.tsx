@@ -15,7 +15,6 @@ export default function Autonomous() {
         } else {
             setCols(true)
         }
-        console.log('this was called')
     }
 
     useLayoutEffect(() => {

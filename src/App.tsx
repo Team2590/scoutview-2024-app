@@ -6,6 +6,7 @@ import Endgame from './sections/Endgame'
 import Export from './sections/Export'
 import { useAtom } from 'jotai'
 import { dataAtom } from './data'
+import CheckData from './components/CheckData'
 
 export default function App() {
 	const [data] = useAtom(dataAtom)
@@ -18,9 +19,10 @@ export default function App() {
 		<>
 			<GetMatch />
 			<Autonomous />
-			{/* <Teleoperated /> */}
-			{/* <Endgame /> */}
+			<Teleoperated />
+			<Endgame />
 			<Export />
+			<CheckData />
 		</>
 	)
 }
