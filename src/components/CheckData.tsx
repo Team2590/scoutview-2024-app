@@ -4,6 +4,7 @@ import { generateExportArray } from '../sections/Export'
 import { useAtom } from 'jotai'
 import { dataAtom } from '../data'
 
+
 export default function CheckData() {
     const [data] = useAtom(dataAtom)
 
@@ -23,11 +24,13 @@ export default function CheckData() {
         return map
     }, [])
 
+    const missing = []
+
     return (
         <>
             <div className='btn-group mx-auto'>
                 <button className='btn btn-primary' data-bs-toggle='modal' data-bs-target='#pastDataModal'>Past Data</button>
-                <button className='btn btn-primary' data-bs-toggle='modal' data-bs-target='#missingDataModal'>Past Data</button>
+                <button className='btn btn-primary' data-bs-toggle='modal' data-bs-target='#missingDataModal'>Missing Data</button>
             </div>
 
 
@@ -71,12 +74,14 @@ export default function CheckData() {
                             <ul>
                                 {Object.keys(data).map((key, index) => {
                                     if ((Object.values(data)[index] == null || Object.values(data)[index] == '') && required.get(key)) {
+                                        missing.push('')
                                         return (
                                             <li className='text-left'>{key}</li>
                                         )
                                     }
                                 })}
                             </ul>
+                            {missing.length == 0 && <p className='text-center'>No missing data</p>}
                         </div>
                         <div className='modal-footer'>
                             <button type='button' className='btn btn-primary' data-bs-dismiss='modal'>Close</button>
