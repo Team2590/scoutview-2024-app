@@ -42,7 +42,7 @@ export default function CheckData() {
                             <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                         </div>
                         <div className='modal-body d-flex flex-column'>
-                            {localStorage.getItem('nemesis-past-data') && JSON.parse(localStorage.getItem('nemesis-past-data')!).map((data: Data) => {
+                            {localStorage.getItem('nemesis-past-data') && JSON.parse(localStorage.getItem('nemesis-past-data')!).reverse().map((data: Data) => {
                                 return (
                                     <div className='mx-auto my-3'>
                                         <QRCode

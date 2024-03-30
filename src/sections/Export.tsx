@@ -31,30 +31,6 @@ export const generateExportArray = (data: Data) => {
     arr[21] = data.droppedHit
 
     return arr
-    // return [
-    //     data.matchNum,
-    //     data.teamNum,
-    //     data.startingPos,
-    //     data.leaveWing,
-    //     data.spkrMade_atn,
-    //     data.spkrMade_atn,
-    //     data.ampMade_atn,
-    //     data.ampMissed_atn,
-    //     data.spkrMade_tp,
-    //     data.spkrMissed_tp,
-    //     data.ampMade_tp,
-    //     data.ampMissed_tp,
-    //     data.coopertition,
-    //     data.climbLvl,
-    //     data.trap,
-    //     data.traverse,
-    //     data.twoRobot,
-    //     null,
-    //     null,
-    //     data.droppedHit,
-    //     null,
-    //     data.scoutName
-    // ]
 }
 
 export default function Export() {
