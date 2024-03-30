@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { dataAtom } from '../data'
 import { defaultData } from './../data'
 import SectionWrapper from '../components/SectionWrapper'
@@ -8,30 +8,53 @@ import YesNo from '../components/YesNo'
 import CheckData from '../components/CheckData'
 
 export const generateExportArray = (data: Data) => {
-    return [
-        data.matchNum,
-        data.teamNum,
-        data.startingPos,
-        data.leaveWing,
-        data.spkrMade_atn,
-        data.spkrMade_atn,
-        data.ampMade_atn,
-        data.ampMissed_atn,
-        data.spkrMade_tp,
-        data.spkrMissed_tp,
-        data.ampMade_tp,
-        data.ampMissed_tp,
-        data.coopertition,
-        data.climbLvl,
-        data.trap,
-        data.traverse,
-        data.twoRobot,
-        null,
-        null,
-        data.droppedHit,
-        null,
-        data.scoutName
-    ]
+    const arr = new Array(23).fill(0)
+
+    arr[0] = data.matchNum
+    arr[1] = data.teamNum
+    arr[23] = data.scoutName
+    arr[2] = data.startingPos
+    arr[3] = data.leaveWing
+    arr[4] = data.spkrMade_atn
+    arr[5] = data.spkrMissed_atn
+    arr[6] = data.ampMade_atn
+    arr[7] = data.ampMissed_atn
+    arr[8] = data.spkrMade_tp
+    arr[9] = data.spkrMissed_tp
+    arr[10] = data.ampMade_tp
+    arr[11] = data.ampMissed_tp
+    arr[12] = data.coopertition
+    arr[13] = data.climbLvl
+    arr[14] = data.trap
+    arr[17] = data.traverse
+    arr[18] = data.twoRobot
+    arr[21] = data.droppedHit
+
+    return arr
+    // return [
+    //     data.matchNum,
+    //     data.teamNum,
+    //     data.startingPos,
+    //     data.leaveWing,
+    //     data.spkrMade_atn,
+    //     data.spkrMade_atn,
+    //     data.ampMade_atn,
+    //     data.ampMissed_atn,
+    //     data.spkrMade_tp,
+    //     data.spkrMissed_tp,
+    //     data.ampMade_tp,
+    //     data.ampMissed_tp,
+    //     data.coopertition,
+    //     data.climbLvl,
+    //     data.trap,
+    //     data.traverse,
+    //     data.twoRobot,
+    //     null,
+    //     null,
+    //     data.droppedHit,
+    //     null,
+    //     data.scoutName
+    // ]
 }
 
 export default function Export() {
@@ -49,6 +72,10 @@ export default function Export() {
     }
 
     const exportData = generateExportArray(data)
+
+    useEffect(() => {
+        console.log(JSON.stringify(exportData))
+    }, [data])
 
     return (
         <SectionWrapper label='Export'>
