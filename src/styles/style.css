@@ -1,4 +1,80 @@
 @charset "UTF-8";
+@font-face {
+  font-family: "Lato";
+  font-style: italic;
+  font-weight: 100;
+  font-display: swap;
+  src: url("../fonts/Lato-Thin.ttf");
+}
+@font-face {
+  font-family: "Lato";
+  font-weight: 100;
+  font-display: swap;
+  src: url("../fonts/Lato-ThinItalic.ttf");
+}
+@font-face {
+  font-family: "Lato";
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../fonts/Lato-Light.ttf");
+}
+@font-face {
+  font-family: "Lato";
+  font-weight: 300;
+  font-display: swap;
+  src: url("../fonts/Lato-LightItalic.ttf");
+}
+@font-face {
+  font-family: "Lato";
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/Lato-Regular.ttf");
+}
+@font-face {
+  font-family: "Lato";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/Lato-Italic.ttf");
+}
+@font-face {
+  font-family: "Lato";
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/Lato-Bold.ttf");
+}
+@font-face {
+  font-family: "Lato";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/Lato-BoldItalic.ttf");
+}
+@font-face {
+  font-family: "Lato";
+  font-weight: 900;
+  font-display: swap;
+  src: url("../fonts/Lato-Black.ttf");
+}
+@font-face {
+  font-family: "Lato";
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../fonts/Lato-BlackItalic.ttf");
+}
+.input-row {
+  max-width: 800px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+* {
+  font-family: "Lato", sans-serif;
+}
+
 /*!
  * Bootstrap  v5.3.3 (https://getbootstrap.com/)
  * Copyright 2011-2024 The Bootstrap Authors

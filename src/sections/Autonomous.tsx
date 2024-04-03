@@ -35,34 +35,22 @@ export default function Autonomous() {
             <div className='container'>
                 <img src='field.jpg' alt='Field Image' className='d-block mx-auto mt-5 img-fluid' />
                 <div className={`mt-4 ${cols ? 'row' : ''}`}>
-                    <div className='col mx-auto'>
+                    <div className='col mx-auto mb-4 mb-xl-0'>
                         <SelectInput property='startingPos' label='Starting Position' options={['A', 'B', 'C', 'D']} />
                     </div>
-                    <div className='col mx-auto mt-md-4 mt-lg-0'>
+                    <div className='col mx-auto mt-md-5 mt-lg-0'>
                         <YesNo property='leaveWing' label='Leave Start Line?' />
                     </div>
                 </div>
-                <div className='row mt-5'>
-                    <div className='col'>
-                        <PlusMinus property='spkrMade_atn' label='Speaker Scored' />
-                    </div>
-                    <div className='col'>
-                        <img src='speaker.png' alt='Speaker Image' className='d-block mx-auto' style={{ maxHeight: 200 }} />
-                    </div>
-                    <div className='col'>
-                        <PlusMinus property='spkrMissed_atn' label='Speaker Missed' />
-                    </div>
+                <div className='input-row mt-5'>
+                    <PlusMinus property='spkrMade_atn' label='Speaker Scored' />
+                    <img src='speaker.png' alt='Speaker Image' className='d-block mx-auto' style={{ maxHeight: 200 }} />
+                    <PlusMinus property='spkrMissed_atn' label='Speaker Missed' />
                 </div>
-                <div className='row my-5'>
-                    <div className='col'>
-                        <PlusMinus property='ampMade_atn' label='Amp Made' />
-                    </div>
-                    <div className='col'>
-                        <img src='amp.png' alt='Amp Image' className='d-block mx-auto' style={{ maxHeight: 200 }} />
-                    </div>
-                    <div className='col'>
-                        <PlusMinus property='ampMissed_atn' label='Amp Missed' />
-                    </div>
+                <div className='input-row my-5'>
+                    <PlusMinus property='ampMade_atn' label='Amp Made' />
+                    <img src='amp.png' alt='Amp Image' className='d-block mx-auto' style={{ maxHeight: 200 }} />
+                    <PlusMinus property='ampMissed_atn' label='Amp Missed' />
                 </div>
             </div>
         </SectionWrapper>

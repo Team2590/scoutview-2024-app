@@ -15,11 +15,11 @@ export default function Endgame() {
                         <YesNo property='twoRobot' label='Two Robots?' />
                     </div>
                 </div>
-                <div className='mt-md-5 mt-lg-0'>
+                <div className='mt-4'>
                     <YesNo property='droppedHit' label='Dropped When Hit?' />
                 </div>
             </div>
-            <div className='mx-auto d-flex flex-column gap-5 mt-5'>
+            <div className='mx-auto d-flex flex-column gap-5 my-5'>
                 <SelectInput property='climbLvl' options={['Parked', 'Climb', 'Mic', 'N/A']} label='Climb Level' />
                 <SelectInput property='trap' options={['0', '1', '2', '3']} label='Trap Count' />
             </div>

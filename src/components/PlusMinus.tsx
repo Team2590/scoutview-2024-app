@@ -2,6 +2,8 @@ import { useAtom } from 'jotai'
 import React from 'react'
 import { dataAtom } from '../data'
 
+const buttonStyles: React.CSSProperties = { width: 78, height: 78 }
+
 export default function PlusMinus({ property, label }: { property: keyof Data, label: string }) {
     const [data, setData] = useAtom(dataAtom)
 
@@ -29,21 +31,23 @@ export default function PlusMinus({ property, label }: { property: keyof Data, l
     return (
         <div className='text-center'>
             <p className='d-block mb-2'>{label}</p>
-            <p className='bg-info mx-auto py-3 rounded-top' style={{ width: 211.5 }}>{data[property]}</p>
+            <p className='bg-info mx-auto py-3 rounded' style={{ width: 156 }}>{data[property]}</p>
             <div className='btn-group' style={{ marginTop: -16 }}>
                 <button
-                    className={`btn btn-primary px-5 py-4 rounded-end-0`}
+                    className={`btn btn-primary rounded-end-0`}
+                    style={buttonStyles}
                     onClick={increment}
                 >
                     +
                 </button>
                 <button
-                    className={`btn btn-tertiary px-5 py-4 rounded-start-0`}
+                    className={`btn btn-tertiary rounded-start-0`}
+                    style={buttonStyles}
                     onClick={decrement}
                 >
                     -
                 </button>
             </div>
-        </div>
+        </div >
     )
 }

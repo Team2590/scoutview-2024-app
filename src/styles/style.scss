@@ -6,11 +6,23 @@ $enable-negative-margins: true;
 
 @import '../../node_modules/bootstrap/scss/functions';
 @import '../../node_modules/bootstrap/scss/variables';
+@import './fonts.scss';
 
 $custom-colors: (
 	'tertiary': #485058
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);
+
+.input-row {
+	max-width: 800px;
+	margin-inline: auto;
+	display: flex;
+	flex-direction: row;
+}
+
+* {
+	font-family: 'Lato', sans-serif;
+}
 
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';

@@ -55,17 +55,19 @@ export default function Export() {
 
     return (
         <SectionWrapper label='Export'>
-            <div className='mx-auto text-center mt-5'>
-                <QRCode
-                    value={JSON.stringify(exportData)}
-                    bgColor='white'
-                    // fgcolor='black'
-                    size={384}
-                    style={{ border: '20px solid white' }}
-                />
-            </div>
-            <div className='text-center mt-3'>
-                <CheckData />
+            <div style={{ minHeight: 'calc(529px + 5rem)' }}>
+                <div className='mx-auto text-center mt-5'>
+                    <QRCode
+                        value={JSON.stringify(exportData)}
+                        bgColor='white'
+                        // fgcolor='black'
+                        size={384}
+                        style={{ border: '20px solid white' }}
+                    />
+                </div>
+                <div className='text-center mt-3'>
+                    <CheckData />
+                </div>
             </div>
             <button
                 className='btn btn-success rounded-0 w-100 text-white py-5 position-absolute bottom-0'
