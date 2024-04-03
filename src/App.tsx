@@ -6,7 +6,6 @@ import Endgame from './sections/Endgame'
 import Export from './sections/Export'
 import { useAtom } from 'jotai'
 import { dataAtom } from './data'
-import ClearStorage from './components/ClearStorage'
 
 export default function App() {
 	const [data] = useAtom(dataAtom)
@@ -17,7 +16,6 @@ export default function App() {
 
 	return (
 		<>
-			<ClearStorage />
 			<GetMatch />
 			<Autonomous />
 			<Teleoperated />
