@@ -39,7 +39,6 @@ export default function CheckData() {
             <div className='btn-group mx-auto'>
                 <button className='btn btn-primary' data-bs-toggle='modal' data-bs-target='#pastDataModal'>Past Data</button>
                 <button className='btn btn-primary' data-bs-toggle='modal' data-bs-target='#missingDataModal'>Missing Data</button>
-                <button className='btn btn-primary' data-bs-toggle='modal' data-bs-target='#clearStorageModal'>Clear Storage</button>
             </div>
 
             <div className='modal modal-xl fade' id='pastDataModal' tabIndex={-1} aria-labelledby='pastDataModalLabel' aria-hidden='true'>
@@ -52,17 +51,21 @@ export default function CheckData() {
                         <div className='modal-body d-flex flex-column'>
                             {localStorage.getItem('nemesis-past-data') && JSON.parse(localStorage.getItem('nemesis-past-data')!).reverse().map((data: Data) => {
                                 return (
-                                    <div className='mx-auto my-3'>
-                                        <QRCode
-                                            value={JSON.stringify(generateExportArray(data))}
-                                            bgColor='white'
-                                            size={384}
-                                            style={{ border: '20px solid white' }}
-                                        />
-                                        <p className='text-center mt-2'>{data.scoutName}, Match {data.matchNum}, Team {data.teamNum}</p>
-                                    </div>
+                                    <>
+                                        <div className='mx-auto my-3'>
+                                            <QRCode
+                                                value={JSON.stringify(generateExportArray(data))}
+                                                bgColor='white'
+                                                size={384}
+                                                style={{ border: '20px solid white' }}
+                                            />
+                                            <p className='text-center mt-2'>{data.scoutName}, Match {data.matchNum}, Team {data.teamNum}</p>
+                                        </div>
+                                    </>
                                 )
                             })}
+                            {localStorage.getItem('nemesis-past-data') == null && <p className='text-center'>No Past Data</p>}
+                            <button className='btn btn-primary mx-auto' style={{ width: 'fit-content' }} data-bs-toggle='modal' data-bs-target='#clearStorageModal'>Clear Storage</button>
                         </div>
                         <div className='modal-footer'>
                             <button type='button' className='btn btn-primary' data-bs-dismiss='modal'>Close</button>
