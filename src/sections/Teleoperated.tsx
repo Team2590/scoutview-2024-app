@@ -17,8 +17,13 @@ export default function Teleoperated() {
                     <img src='amp.png' alt='Amp Image' className='d-block mx-auto' style={{ maxHeight: 200 }} />
                     <PlusMinus property='ampMissed_tp' label='Amp Missed' />
                 </div>
-                <div className='my-5'>
-                    <YesNo property='coopertition' label='Coopertition Button (Yellow Light)' />
+                <div className='input-row my-5'>
+                    <div className='mx-auto'>
+                        <YesNo property='coopertition' label='Coopertition Button (Yellow Light)' />
+                    </div>
+                    <div className='mx-auto'>
+                        <PlusMinus property='notesPassed' label='Notes Fed/Passed' />
+                    </div>
                 </div>
             </div>
         </SectionWrapper >

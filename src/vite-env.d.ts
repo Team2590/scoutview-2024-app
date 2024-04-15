@@ -19,4 +19,5 @@ type Data = {
     traverse: "true" | "false" | null
     twoRobot: "true" | "false" | null
     droppedHit: "true" | "false" | null
+    notesPassed: number
 }

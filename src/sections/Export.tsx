@@ -29,7 +29,7 @@ export const generateExportArray = (data: Data) => {
     arr[17] = data.traverse
     arr[18] = data.twoRobot
     arr[21] = data.droppedHit
-
+    arr[22] = data.notesPassed
     return arr
 }
 
