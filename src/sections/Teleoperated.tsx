@@ -22,7 +22,7 @@ export default function Teleoperated() {
                         <YesNo property='coopertition' label='Coopertition Button (Yellow Light)' />
                     </div>
                     <div className='mx-auto'>
-                        <PlusMinus property='notesPassed' label='Notes Fed/Passed' />
+                        <PlusMinus property='notesFed' label='Notes Fed/Passed' />
                     </div>
                 </div>
             </div>

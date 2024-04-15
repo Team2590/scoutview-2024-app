@@ -20,7 +20,7 @@ export const defaultData: Data = {
     traverse: null,
     twoRobot: null,
     droppedHit: null,
-    notesPassed: 0
+    notesFed: 0
 }
 
 export const dataAtom = atomWithStorage('nemesis-data', defaultData)

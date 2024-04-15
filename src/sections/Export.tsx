@@ -29,7 +29,7 @@ export const generateExportArray = (data: Data) => {
     arr[17] = data.traverse
     arr[18] = data.twoRobot
     arr[21] = data.droppedHit
-    arr[22] = data.notesPassed
+    arr[22] = data.notesFed
     return arr
 }
 
@@ -38,8 +38,16 @@ export default function Export() {
 
     const storeData = () => {
         const pastData = localStorage.getItem('nemesis-past-data') ? JSON.parse(localStorage.getItem('nemesis-past-data')!) : []
+        const isEmptyData = Object.keys(data).every((key, i) => {
+            return data[key as keyof Data] == defaultData[key as keyof Data]
+        })
+        if (isEmptyData) return
         pastData.push(data)
-        localStorage.setItem('nemesis-past-data', JSON.stringify(pastData))
+        if (pastData.length > 10) {
+            localStorage.setItem('nemesis-past-data', JSON.stringify(pastData.slice(1, 11)))
+        } else {
+            localStorage.setItem('nemesis-past-data', JSON.stringify(pastData))
+        }
     }
 
     const resetData = () => {
