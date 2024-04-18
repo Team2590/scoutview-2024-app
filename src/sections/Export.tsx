@@ -38,7 +38,7 @@ export default function Export() {
 
     const storeData = () => {
         const pastData = localStorage.getItem('nemesis-past-data') ? JSON.parse(localStorage.getItem('nemesis-past-data')!) : []
-        const isEmptyData = Object.keys(data).every((key, i) => {
+        const isEmptyData = Object.keys(data).every((key) => {
             return data[key as keyof Data] == defaultData[key as keyof Data]
         })
         if (isEmptyData) return
