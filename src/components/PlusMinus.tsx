@@ -34,18 +34,18 @@ export default function PlusMinus({ property, label }: { property: keyof Data, l
             <p className='bg-info mx-auto py-3 rounded' style={{ width: 156 }}>{data[property]}</p>
             <div className='btn-group' style={{ marginTop: -16 }}>
                 <button
-                    className={`btn btn-primary rounded-end-0`}
-                    style={buttonStyles}
-                    onClick={increment}
-                >
-                    +
-                </button>
-                <button
-                    className={`btn btn-tertiary rounded-start-0`}
+                    className={`btn btn-tertiary rounded-end-0`}
                     style={buttonStyles}
                     onClick={decrement}
                 >
                     -
+                </button>
+                <button
+                    className={`btn btn-primary rounded-start-0`}
+                    style={buttonStyles}
+                    onClick={increment}
+                >
+                    +
                 </button>
             </div>
         </div >
