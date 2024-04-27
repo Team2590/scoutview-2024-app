@@ -44,6 +44,19 @@ export default function SettingsPage() {
     const [autoAssignTeams, setAutoAssignTeams] = useLocalStorage('auto-assign-teams', false)
     const [data, setData] = useAtom(dataAtom)
 
+    useEffect(() => {
+        if (autoIncrementMatches && data.matchNum == '') {
+            setData(prev => {
+                return { ...prev, matchNum: 1 }
+            })
+        }
+        if (autoAssignTeams && data.teamNum == '') {
+            setData(prev => {
+                return { ...prev, teamNum: JSON.parse(localStorage.getItem('teams')!)[prev.matchNum][JSON.parse(localStorage.getItem('robot')!) - 1] }
+            })
+        }
+    }, [autoAssignTeams, autoIncrementMatches])
+
     const resetCount = () => {
         setData({ ...data, matchNum: 1, teamNum: autoAssignTeams ? JSON.parse(localStorage.getItem('teams')!)[1][JSON.parse(localStorage.getItem('robot')!) - 1] : '' })
     }
