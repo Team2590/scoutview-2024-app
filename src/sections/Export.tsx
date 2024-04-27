@@ -27,9 +27,9 @@ export default function Export() {
 
     const resetData = () => {
         storeData()
-        if (localStorage.getItem('auto-increment')) {
+        if (JSON.parse(localStorage.getItem('auto-increment')!) == true) {
             const matchNum = Number(data.matchNum) + 1
-            const teamNum = localStorage.getItem('auto-assign-teams') ? JSON.parse(localStorage.getItem('teams')!)[matchNum - 1][JSON.parse(localStorage.getItem('robot')!) - 1] : ''
+            const teamNum = JSON.parse(localStorage.getItem('auto-assign-teams')!) ? JSON.parse(localStorage.getItem('teams')!)[matchNum - 1][JSON.parse(localStorage.getItem('robot')!) - 1] : ''
             setData({
                 ...defaultData,
                 scoutName: data.scoutName,
