@@ -24,10 +24,13 @@ const setComp = async (key: string) => {
         }
     })
     const matchesData: any[] = await response.json()
-    const simplifed = matchesData.map(({ alliances, match_number, key: matchKey }: { alliances: any, match_number: number, key: string }) => {
-        if (!matchKey.includes('qm')) return null
-        else return { match_number, teams: [...alliances.red.team_keys, ...alliances.blue.team_keys] }
-    }).filter(d => { return d != null }).sort((a, b) => { return a?.match_number! - b?.match_number! }).map(d => d?.teams.map((team: string) => team.replace('frc', '')))
+    const simplifed = matchesData.filter(({ key }) => key.includes('qm'))
+        .sort((a, b) => a?.match_number! - b?.match_number!)
+        .map(({ alliances, match_number, key: matchKey }: { alliances: any, match_number: number, key: string }) => {
+            if (!matchKey.includes('qm')) return null
+            else return { match_number, teams: [...alliances.red.team_keys, ...alliances.blue.team_keys] }
+        }).map(d => d?.teams.map((team: string) => team.replace('frc', '')))
+    console.log(simplifed)
     localStorage.setItem('teams', JSON.stringify(simplifed))
 }
 
