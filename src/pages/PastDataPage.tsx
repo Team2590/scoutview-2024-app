@@ -1,4 +1,3 @@
-import React from 'react'
 import { generateExportArray } from '../util/generateExportArray'
 import QRCode from 'react-qr-code'
 import { Link } from 'react-router-dom'

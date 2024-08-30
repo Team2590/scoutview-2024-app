@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function Header({ label }: { label: string }) {
     return (
         <div className='bg-secondary w-100 py-3 text-center'>

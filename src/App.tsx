@@ -1,11 +1,10 @@
-import React from 'react'
-import { Route, RouterProvider, Routes, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
+import { Route, RouterProvider, createHashRouter, createRoutesFromElements } from 'react-router-dom'
 import PastDataPage from './pages/PastDataPage'
 import SettingsPage from './pages/SettingsPage'
 import MainPage from './pages/MainPage'
 
 export default function App() {
-    const router = createBrowserRouter(
+    const router = createHashRouter(
         createRoutesFromElements(
             <>
                 <Route path='/' element={<MainPage />} />

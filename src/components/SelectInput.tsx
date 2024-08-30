@@ -1,7 +1,5 @@
-import React from 'react'
 import { useAtom } from 'jotai'
 import { dataAtom } from '../data'
-
 
 export default function SelectInput({ property, label, options }: { property: keyof Data, label: string, options: string[] }) {
     const [data, setData] = useAtom(dataAtom)

@@ -1,5 +1,5 @@
-import { useAtom } from 'jotai'
 import React from 'react'
+import { useAtom } from 'jotai'
 import { dataAtom } from '../data'
 
 export default function TextInput({ property, label }: { property: keyof Data, label: string }) {

@@ -1,5 +1,4 @@
 import { useAtom } from 'jotai'
-import React from 'react'
 import { dataAtom } from '../data'
 
 export default function YesNo({ property, label }: { property: keyof Data, label: string }) {

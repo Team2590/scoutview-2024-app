@@ -1,5 +1,5 @@
-import { useAtom } from 'jotai'
 import React from 'react'
+import { useAtom } from 'jotai'
 import { dataAtom } from '../data'
 
 const buttonStyles: React.CSSProperties = { width: 78, height: 78 }

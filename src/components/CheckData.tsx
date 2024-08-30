@@ -1,13 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { useAtom } from 'jotai'
 import { dataAtom } from '../data'
-import { useRerender } from '../hooks/useRerender'
 import { useNavigate } from 'react-router-dom'
 
 
 export default function CheckData() {
     const [data] = useAtom(dataAtom)
-    const forceRerender = useRerender()
     const navigate = useNavigate()
 
     const required = useMemo(() => {
@@ -27,11 +25,6 @@ export default function CheckData() {
     }, [])
 
     const missing = []
-
-    const clearStorage = () => {
-        localStorage.clear()
-        forceRerender()
-    }
 
     return (
         <>
@@ -63,21 +56,6 @@ export default function CheckData() {
                         </div>
                         <div className='modal-footer'>
                             <button type='button' className='btn btn-primary' data-bs-dismiss='modal'>Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div className='modal fade' id='clearStorageModal' tabIndex={-1} aria-labelledby='clearStorageModalLabel' aria-hidden='true'>
-                <div className='modal-dialog'>
-                    <div className='modal-content'>
-                        <div className='modal-header'>
-                            <h1 className='modal-title fs-5' id='clearStorageModalLabel'>Clear Storage?</h1>
-                            <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                        </div>
-                        <div className='modal-footer'>
-                            <button type='button' className='btn btn-success text-white' data-bs-dismiss='modal' onClick={clearStorage}>Yes</button>
-                            <button type='button' className='btn btn-primary' data-bs-dismiss='modal'>No</button>
                         </div>
                     </div>
                 </div>

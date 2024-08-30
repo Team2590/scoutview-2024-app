@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { useAtom } from 'jotai'
 import { dataAtom } from '../data'
 
-const fetcher = (url: string) => {
+const fetcher = async (url: string) => {
     return fetch(url,
         {
             method: 'GET',
@@ -20,11 +20,12 @@ const setRobot = (num: string) => {
 }
 
 export default function SettingsPage() {
-    const [compData, setCompData] = useLocalStorage<any[] | null>('comp-data', null)
+    const [compNames, setCompNames] = useLocalStorage<any[] | null>('comp-names', null)
     const [autoIncrementMatches, setAutoIncrementMatches] = useLocalStorage('auto-increment', false)
+    const [usingLocalData, setUsingLocalData] = useLocalStorage('use-local-data', false)
     const [autoAssignTeams, setAutoAssignTeams] = useLocalStorage('auto-assign-teams', false)
     const [data, setData] = useAtom(dataAtom)
-    const [teams, setTeams] = useState(false)
+    const [haveTeams, setHaveTeams] = useLocalStorage('have-teams', false)
 
     useEffect(() => {
         if (autoIncrementMatches && data.matchNum == '') {
@@ -57,7 +58,7 @@ export default function SettingsPage() {
                     else return { match_number, teams: [...alliances.red.team_keys, ...alliances.blue.team_keys] }
                 }).map(d => d?.teams.map((team: string) => team.replace('frc', '')))
             localStorage.setItem('teams', JSON.stringify(simplifed))
-            setTeams(true)
+            setHaveTeams(true)
         }
     }, [])
 
@@ -69,7 +70,33 @@ export default function SettingsPage() {
             const simplified = data.map(({ name, key }) => {
                 return { name, key }
             })
-            setCompData(simplified)
+            setCompNames(simplified)
+        }
+    }
+
+    const handleLocalData = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (confirm('Using this file will overwrite any previously stored match schedule. Are you sure you want to continue?')) {
+            const file = e.target.files?.[0]
+            const reader = new FileReader()
+
+            reader.onload = (e) => {
+                try {
+                    localStorage.setItem('teams', e.target?.result as string)
+                    setHaveTeams(true)
+                } catch (e) {
+                    console.log(e)
+                }
+            }
+
+            reader.readAsText(file!)
+        }
+    }
+
+    useEffect(() => console.log('rerender'))
+
+    const clearLocalStorage = () => {
+        if (confirm('Are you sure that you want to clear local storage?')) {
+            localStorage.clear()
         }
     }
 
@@ -79,9 +106,12 @@ export default function SettingsPage() {
                 <Link to='/' className='text-decoration-none'> &#8592; Back</Link>
             </div>
             <div className='d-flex justify-content-center align-items-center' style={{ minHeight: 'calc(100vh - 28px)' }}>
-                <div className='card mx-auto' style={{ width: 360 }}>
+                <div className='card mx-auto' style={{ width: 376 }}>
                     <div className='card-body'>
-                        <button className='btn btn-tertiary mb-3' onClick={resetCount}>Reset Match Count</button>
+                        <div className='d-flex justify-content-between'>
+                            <button className='btn btn-tertiary mb-3' onClick={resetCount}>Reset Match Count</button>
+                            <button className='btn btn-tertiary mb-3' onClick={clearLocalStorage}>Clear Local Storage</button>
+                        </div>
                         <div className='form-check form-switch d-flex align-items-center gap-2 mb-3'>
                             <input className='form-check-input' type='checkbox' role='switch' id='auto-increment' checked={autoIncrementMatches} onChange={e => {
                                 if (e.target.checked) setAutoIncrementMatches(e.target.checked)
@@ -93,15 +123,17 @@ export default function SettingsPage() {
                             <label className='form-check-label' htmlFor='auto-increment'>Auto Increment Matches</label>
                         </div>
                         <div className='form-check form-switch d-flex align-items-center gap-2 mb-3'>
-                            <input className='form-check-input' type='checkbox' role='switch' id='use-local' />
+                            <input className='form-check-input' type='checkbox' role='switch' id='use-local' checked={usingLocalData} onChange={e => setUsingLocalData(Boolean(e.target.checked))} />
                             <label className='form-check-label' htmlFor='use-local'>Use Local Data</label>
                         </div>
-                        {compData == null && (
-                            <button className='btn btn-tertiary' onClick={downloadCompNames}>Download Competition Names</button>
+                        {compNames == null && !usingLocalData && (
+                            <div className='text-center'>
+                                <button className='btn btn-tertiary' onClick={downloadCompNames}>Download Competition Names</button>
+                            </div>
                         )}
-                        {compData && (
+                        {(compNames || usingLocalData) && (
                             <>
-                                {teams && (
+                                {haveTeams && (
                                     <div className='form-check form-switch d-flex align-items-center gap-2 mb-3'>
                                         <input className='form-check-input' type='checkbox' role='switch' id='auto-assign' checked={autoAssignTeams} onChange={e => {
                                             setAutoAssignTeams(e.target.checked)
@@ -110,17 +142,22 @@ export default function SettingsPage() {
                                         <label className='form-check-label' htmlFor='auto-assign'>Auto Assign Teams</label>
                                     </div>
                                 )}
-                                <div className='input-group mb-3'>
-                                    <label className='input-group-text' htmlFor='comp-select'>Comp</label>
-                                    <select className='form-select' aria-label='Select Competition' id='comp-select' defaultValue={localStorage.getItem('comp') as string} onChange={e => setComp(e.target.value)}>
-                                        <option selected>Select Competition</option>
-                                        {compData.map(({ name, key }: { name: string, key: string }) => {
-                                            return (
-                                                <option value={key}>{name}</option>
-                                            )
-                                        })}
-                                    </select>
-                                </div>
+                                {!usingLocalData && compNames != null && (
+                                    <div className='input-group mb-3'>
+                                        <label className='input-group-text' htmlFor='comp-select'>Comp</label>
+                                        <select className='form-select' aria-label='Select Competition' id='comp-select' defaultValue={localStorage.getItem('comp') as string} onChange={e => setComp(e.target.value)}>
+                                            <option selected>Select Competition</option>
+                                            {compNames.map(({ name, key }: { name: string, key: string }) => {
+                                                return (
+                                                    <option value={key}>{name}</option>
+                                                )
+                                            })}
+                                        </select>
+                                    </div>
+                                )}
+                                {usingLocalData && (
+                                    <input className='form-control mb-3' type='file' onChange={handleLocalData} />
+                                )}
                                 <div className='input-group'>
                                     <label htmlFor='robot-select' className='input-group-text'>Robot</label>
                                     <select className='form-select' id='robot-select' aria-label='Select Robot' defaultValue={localStorage.getItem('robot')!} style={{ width: 'fit-content' }} onChange={e => setRobot(e.target.value)}>

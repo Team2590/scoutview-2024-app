@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import GetMatch from '../sections/GetMatch'
 import Autonomous from '../sections/Autonomous'
 import Teleoperated from '../sections/Teleoperated'
@@ -8,19 +7,19 @@ import { useAtom } from 'jotai'
 import { dataAtom } from '../data'
 
 export default function MainPage() {
-	const [data, setData] = useAtom(dataAtom)
+    const [data, setData] = useAtom(dataAtom)
 
-	// useEffect(() => {
-	// 	console.log(data)
-	// }, [data])
+    // useEffect(() => {
+    // 	console.log(data)
+    // }, [data])
 
-	return (
-		<>
-			<GetMatch />
-			<Autonomous />
-			<Teleoperated />
-			<Endgame />
-			<Export />
-		</>
-	)
+    return (
+        <>
+            <GetMatch />
+            <Autonomous />
+            <Teleoperated />
+            <Endgame />
+            <Export />
+        </>
+    )
 }
