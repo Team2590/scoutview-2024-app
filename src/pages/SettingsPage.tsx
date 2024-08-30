@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import useSWR from 'swr'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { useAtom } from 'jotai'
 import { dataAtom } from '../data'
@@ -21,7 +20,7 @@ const setRobot = (num: string) => {
 }
 
 export default function SettingsPage() {
-    const { data: compData, isLoading, error } = useSWR('https://www.thebluealliance.com/api/v3/team/frc2590/events/2024', fetcher)
+    const [compData, setCompData] = useLocalStorage<any[] | null>('comp-data', null)
     const [autoIncrementMatches, setAutoIncrementMatches] = useLocalStorage('auto-increment', false)
     const [autoAssignTeams, setAutoAssignTeams] = useLocalStorage('auto-assign-teams', false)
     const [data, setData] = useAtom(dataAtom)
@@ -46,17 +45,33 @@ export default function SettingsPage() {
     }
 
     const setComp = useCallback(async (key: string) => {
-        localStorage.setItem('comp', key)
-        const matchesData: any[] = await fetcher(`https://www.thebluealliance.com/api/v3/event/${key}/matches`)
-        const simplifed = matchesData.filter(({ key }) => key.includes('qm'))
-            .sort((a, b) => a?.match_number! - b?.match_number!)
-            .map(({ alliances, match_number, key: matchKey }: { alliances: any, match_number: number, key: string }) => {
-                if (!matchKey.includes('qm')) return null
-                else return { match_number, teams: [...alliances.red.team_keys, ...alliances.blue.team_keys] }
-            }).map(d => d?.teams.map((team: string) => team.replace('frc', '')))
-        localStorage.setItem('teams', JSON.stringify(simplifed))
-        setTeams(true)
+        if (!navigator.onLine) return alert('You are not connected to the internet')
+
+        if (confirm('Download the competition data?')) {
+            localStorage.setItem('comp', key)
+            const matchesData: any[] = await fetcher(`https://www.thebluealliance.com/api/v3/event/${key}/matches`)
+            const simplifed = matchesData.filter(({ key }) => key.includes('qm'))
+                .sort((a, b) => a?.match_number! - b?.match_number!)
+                .map(({ alliances, match_number, key: matchKey }: { alliances: any, match_number: number, key: string }) => {
+                    if (!matchKey.includes('qm')) return null
+                    else return { match_number, teams: [...alliances.red.team_keys, ...alliances.blue.team_keys] }
+                }).map(d => d?.teams.map((team: string) => team.replace('frc', '')))
+            localStorage.setItem('teams', JSON.stringify(simplifed))
+            setTeams(true)
+        }
     }, [])
+
+    const downloadCompNames = async () => {
+        if (!navigator.onLine) return alert('You are not connected to the internet')
+
+        if (confirm('Download the competition names?')) {
+            const data = await fetcher('https://www.thebluealliance.com/api/v3/team/frc2590/events/2024') as any[]
+            const simplified = data.map(({ name, key }) => {
+                return { name, key }
+            })
+            setCompData(simplified)
+        }
+    }
 
     return (
         <>
@@ -77,6 +92,13 @@ export default function SettingsPage() {
                             }} />
                             <label className='form-check-label' htmlFor='auto-increment'>Auto Increment Matches</label>
                         </div>
+                        <div className='form-check form-switch d-flex align-items-center gap-2 mb-3'>
+                            <input className='form-check-input' type='checkbox' role='switch' id='use-local' />
+                            <label className='form-check-label' htmlFor='use-local'>Use Local Data</label>
+                        </div>
+                        {compData == null && (
+                            <button className='btn btn-tertiary' onClick={downloadCompNames}>Download Competition Names</button>
+                        )}
                         {compData && (
                             <>
                                 {teams && (
