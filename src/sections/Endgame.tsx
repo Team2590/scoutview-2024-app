@@ -1,4 +1,3 @@
-import React from 'react'
 import SectionWrapper from '../components/SectionWrapper'
 import SelectInput from '../components/SelectInput'
 import YesNo from '../components/YesNo'

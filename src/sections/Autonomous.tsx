@@ -1,13 +1,12 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import SectionWrapper from '../components/SectionWrapper'
 import YesNo from '../components/YesNo'
 import SelectInput from '../components/SelectInput'
 import PlusMinus from '../components/PlusMinus'
+import Field from '../components/Field'
 
 export default function Autonomous() {
     const [cols, setCols] = useState(true)
-
-    const isMobile = window.innerWidth < 768
 
     const changeButtonOrientation = () => {
         if (window.innerWidth < 1080) {
@@ -21,9 +20,7 @@ export default function Autonomous() {
         changeButtonOrientation()
         window.addEventListener('resize', changeButtonOrientation)
         window.addEventListener('orientationchange', changeButtonOrientation)
-    }, [])
 
-    useEffect(() => {
         return () => {
             window.removeEventListener('resize', changeButtonOrientation)
             window.removeEventListener('orientationchange', changeButtonOrientation)
@@ -32,8 +29,8 @@ export default function Autonomous() {
 
     return (
         <SectionWrapper label='Autonomous'>
-            <div className='container'>
-                <img src='field.jpg' alt='Field Image' className='d-block mx-auto mt-5 img-fluid' />
+            <div className='container mx-auto'>
+                <Field />
                 <div className={`mt-4 ${cols ? 'row' : ''}`}>
                     <div className='col mx-auto mb-4 mb-xl-0'>
                         <SelectInput property='startingPos' label='Starting Position' options={['A', 'B', 'C', 'D']} />

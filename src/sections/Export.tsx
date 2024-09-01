@@ -1,10 +1,8 @@
 import { useAtom } from 'jotai/react'
-import React, { useEffect } from 'react'
 import { dataAtom } from '../data'
 import { defaultData } from './../data'
 import SectionWrapper from '../components/SectionWrapper'
 import QRCode from 'react-qr-code'
-import YesNo from '../components/YesNo'
 import CheckData from '../components/CheckData'
 import { generateExportArray } from '../util/generateExportArray'
 

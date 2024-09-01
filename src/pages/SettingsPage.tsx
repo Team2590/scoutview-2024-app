@@ -92,8 +92,6 @@ export default function SettingsPage() {
         }
     }
 
-    useEffect(() => console.log('rerender'))
-
     const clearLocalStorage = () => {
         if (confirm('Are you sure that you want to clear local storage?')) {
             localStorage.clear()

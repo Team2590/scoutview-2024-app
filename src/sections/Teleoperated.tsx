@@ -1,4 +1,3 @@
-import React from 'react'
 import SectionWrapper from '../components/SectionWrapper'
 import PlusMinus from '../components/PlusMinus'
 import YesNo from '../components/YesNo'

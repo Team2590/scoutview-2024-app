@@ -1,0 +1,29 @@
+import { useAtom } from 'jotai'
+import { dataAtom } from '../data'
+
+const keys = ['Made', 'Missed', 'Not Attempted']
+
+export default function FieldButton({ index, top, left }: { index: number, top: number, left: number }) {
+    const [data, setData] = useAtom(dataAtom)
+
+    const handleClick = (key: NoteResult) => {
+        setData(prev => {
+            const notes = [...prev.notes]
+            notes[index] = key
+            return { ...prev, notes }
+        })
+    }
+
+    return (
+        <div className='dropdown' style={{ position: 'absolute', top, left }}>
+            <button className='btn btn-field field-button d-flex align-items-baseline justify-content-center p-0' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                <p>{index + 1}</p>
+            </button>
+            <ul className='dropdown-menu'>
+                {keys.map(key => {
+                    return <li><a className={`dropdown-item ${data.notes[index] == key && 'active'}`} onClick={() => handleClick(key as NoteResult)}>{key}</a></li>
+                })}
+            </ul>
+        </div>
+    )
+}

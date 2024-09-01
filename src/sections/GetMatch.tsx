@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import SectionWrapper from '../components/SectionWrapper'
 import TextInput from '../components/TextInput'
 import { useAtom } from 'jotai'
