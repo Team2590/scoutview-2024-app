@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { useAtom } from 'jotai'
 import { dataAtom } from '../data'
@@ -26,6 +26,7 @@ export default function SettingsPage() {
     const [autoAssignTeams, setAutoAssignTeams] = useLocalStorage('auto-assign-teams', false)
     const [data, setData] = useAtom(dataAtom)
     const [haveTeams, setHaveTeams] = useLocalStorage('have-teams', false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (autoIncrementMatches && data.matchNum == '') {
@@ -42,7 +43,9 @@ export default function SettingsPage() {
     }, [autoAssignTeams, autoIncrementMatches])
 
     const resetCount = () => {
-        setData({ ...data, matchNum: 1, teamNum: autoAssignTeams ? JSON.parse(localStorage.getItem('teams')!)[1][JSON.parse(localStorage.getItem('robot')!) - 1] : '' })
+        if (confirm('Reset match count?')) {
+            setData({ ...data, matchNum: 1, teamNum: autoAssignTeams ? JSON.parse(localStorage.getItem('teams')!)[1][JSON.parse(localStorage.getItem('robot')!) - 1] : '' })
+        }
     }
 
     const setComp = useCallback(async (key: string) => {
@@ -93,9 +96,14 @@ export default function SettingsPage() {
     }
 
     const clearLocalStorage = () => {
-        if (confirm('Are you sure that you want to clear local storage?')) {
+        if (confirm('Clear local storage?')) {
             localStorage.clear()
+            navigate('/')
         }
+    }
+
+    const resetPastData = () => {
+        if (confirm('Reset past data?')) localStorage.removeItem('nemesis-past-data')
     }
 
     return (
@@ -109,6 +117,9 @@ export default function SettingsPage() {
                         <div className='d-flex justify-content-between'>
                             <button className='btn btn-tertiary mb-3' onClick={resetCount}>Reset Match Count</button>
                             <button className='btn btn-tertiary mb-3' onClick={clearLocalStorage}>Clear Local Storage</button>
+                        </div>
+                        <div className='text-center'>
+                            <button className='btn btn-tertiary mb-3' onClick={resetPastData}>Reset Past Data</button>
                         </div>
                         <div className='form-check form-switch d-flex align-items-center gap-2 mb-3'>
                             <input className='form-check-input' type='checkbox' role='switch' id='auto-increment' checked={autoIncrementMatches} onChange={e => {

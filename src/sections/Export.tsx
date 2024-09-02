@@ -24,24 +24,26 @@ export default function Export() {
     }
 
     const resetData = () => {
-        storeData()
-        if (JSON.parse(localStorage.getItem('auto-increment')!) == true) {
-            const matchNum = Number(data.matchNum) + 1
-            const teamNum = JSON.parse(localStorage.getItem('auto-assign-teams')!) ? JSON.parse(localStorage.getItem('teams')!)[matchNum - 1][JSON.parse(localStorage.getItem('robot')!) - 1] : ''
-            setData({
-                ...defaultData,
-                scoutName: data.scoutName,
-                matchNum,
-                teamNum
-            })
-        } else[
-            setData({
-                ...defaultData,
-                scoutName: data.scoutName,
-                matchNum: '',
-                teamNum: ''
-            })
-        ]
+        if (confirm('Are you sure that you want to clear?')) {
+            storeData()
+            if (JSON.parse(localStorage.getItem('auto-increment')!) == true) {
+                const matchNum = Number(data.matchNum) + 1
+                const teamNum = JSON.parse(localStorage.getItem('auto-assign-teams')!) ? JSON.parse(localStorage.getItem('teams')!)[matchNum - 1][JSON.parse(localStorage.getItem('robot')!) - 1] : ''
+                setData({
+                    ...defaultData,
+                    scoutName: data.scoutName,
+                    matchNum,
+                    teamNum
+                })
+            } else[
+                setData({
+                    ...defaultData,
+                    scoutName: data.scoutName,
+                    matchNum: '',
+                    teamNum: ''
+                })
+            ]
+        }
     }
 
     const exportData = generateExportArray(data)
