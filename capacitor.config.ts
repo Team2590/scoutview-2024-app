@@ -1,12 +1,12 @@
-import { CapacitorConfig } from '@capacitor/cli';
+import { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
   appId: 'com.scoutview2024.app',
-  appName: 'scoutview-2024',
+  appName: 'Scoutview 2024',
   webDir: 'dist',
   server: {
     androidScheme: 'https'
   }
-};
+}
 
-export default config;
+export default config
