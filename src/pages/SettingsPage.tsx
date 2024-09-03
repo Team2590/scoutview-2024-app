@@ -114,6 +114,10 @@ export default function SettingsPage() {
             <div className='d-flex justify-content-center align-items-center' style={{ minHeight: 'calc(100vh - 28px)' }}>
                 <div className='card mx-auto' style={{ width: 376 }}>
                     <div className='card-body'>
+                        <div>
+                            <p>Window Height: {window.innerHeight}</p>
+                            <p>Window Width: {window.innerWidth}</p>
+                        </div>
                         <div className='d-flex justify-content-between'>
                             <button className='btn btn-tertiary mb-3' onClick={resetCount}>Reset Match Count</button>
                             <button className='btn btn-tertiary mb-3' onClick={clearLocalStorage}>Clear Local Storage</button>
@@ -167,18 +171,20 @@ export default function SettingsPage() {
                                 {usingLocalData && (
                                     <input className='form-control mb-3' type='file' onChange={handleLocalData} />
                                 )}
-                                <div className='input-group'>
-                                    <label htmlFor='robot-select' className='input-group-text'>Robot</label>
-                                    <select className='form-select' id='robot-select' aria-label='Select Robot' defaultValue={localStorage.getItem('robot')!} style={{ width: 'fit-content' }} onChange={e => setRobot(e.target.value)}>
-                                        <option selected>Select Robot</option>
-                                        <option value={1}>Red Robot 1</option>
-                                        <option value={2}>Red Robot 2</option>
-                                        <option value={3}>Red Robot 3</option>
-                                        <option value={4}>Blue Robot 1</option>
-                                        <option value={5}>Blue Robot 2</option>
-                                        <option value={6}>Blue Robot 3</option>
-                                    </select>
-                                </div>
+                                {haveTeams && (
+                                    <div className='input-group'>
+                                        <label htmlFor='robot-select' className='input-group-text'>Robot</label>
+                                        <select className='form-select' id='robot-select' aria-label='Select Robot' defaultValue={localStorage.getItem('robot')!} style={{ width: 'fit-content' }} onChange={e => setRobot(e.target.value)}>
+                                            <option selected>Select Robot</option>
+                                            <option value={1}>Red Robot 1</option>
+                                            <option value={2}>Red Robot 2</option>
+                                            <option value={3}>Red Robot 3</option>
+                                            <option value={4}>Blue Robot 1</option>
+                                            <option value={5}>Blue Robot 2</option>
+                                            <option value={6}>Blue Robot 3</option>
+                                        </select>
+                                    </div>
+                                )}
                             </>
                         )}
                     </div>
