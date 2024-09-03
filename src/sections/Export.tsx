@@ -48,6 +48,8 @@ export default function Export() {
 
     const exportData = generateExportArray(data)
 
+    console.log(exportData)
+
     // useEffect(() => {
     //     console.log(JSON.stringify(exportData))
     // }, [data])
