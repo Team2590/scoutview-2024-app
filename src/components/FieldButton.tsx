@@ -3,7 +3,7 @@ import { dataAtom } from '../data'
 
 const keys = ['Made', 'Missed', 'Not Attempted']
 
-export default function FieldButton({ index, top, left }: { index: number, top: number, left: number }) {
+export default function FieldButton({ index, top, left }: { index: number, top: number | string, left: number | string }) {
     const [data, setData] = useAtom(dataAtom)
 
     const handleClick = (key: NoteResult) => {

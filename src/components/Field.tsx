@@ -2,32 +2,32 @@ import FieldButton from './FieldButton'
 import SelectInput from './SelectInput'
 
 interface BtnPositions {
-    top: number
-    left: number
+    top: number | string
+    left: number | string
 }
 
 const btnPositions: BtnPositions[] = [
-    { top: 200, left: 234 },
-    { top: 270, left: 234 },
-    { top: 330, left: 234 },
-    { top: 50, left: 455 },
-    { top: 125, left: 455 },
-    { top: 200, left: 455 },
-    { top: 275, left: 455 },
-    { top: 350, left: 455 },
-    { top: 200, left: 680 },
-    { top: 270, left: 680 },
-    { top: 330, left: 680 }
+    { top: '48%', left: '25.5%' },
+    { top: '64%', left: '25.5%' },
+    { top: '79%', left: '25.5%' },
+    { top: '11.5%', left: '49%' },
+    { top: '30%', left: '49%' },
+    { top: '48%', left: '49%' },
+    { top: '66%', left: '49%' },
+    { top: '84%', left: '49%' },
+    { top: '48%', left: '73%' },
+    { top: '64%', left: '73%' },
+    { top: '79%', left: '73%' }
 ]
 
 export default function Field() {
     return (
         <>
-            <div className='mx-auto position-relative' style={{ width: 936 }}>
+            <div className='mx-auto position-relative'>
                 {btnPositions.map(({ top, left }, i) => {
                     return <FieldButton top={top} left={left} index={i} />
                 })}
-                <img src='field.jpg' alt='Field Image' className='d-block mx-auto mt-5' style={{ width: 936, height: 'auto' }} />
+                <img src='field.jpg' alt='Field Image' className='d-block mx-auto mt-5 img-fluid' />
             </div>
             <div className='mt-4'>
                 <SelectInput label='Preload Note' options={['Made', 'Missed', 'Not Attempted']} property='preloadNote' />
