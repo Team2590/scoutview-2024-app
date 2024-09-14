@@ -8,7 +8,7 @@ import { dataAtom } from '../data'
 import { useEffect } from 'react'
 
 export default function MainPage() {
-    const [data, setData] = useAtom(dataAtom)
+    const [data] = useAtom(dataAtom)
 
     useEffect(() => {
         console.log(data)

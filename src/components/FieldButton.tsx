@@ -21,7 +21,7 @@ export default function FieldButton({ index, top, left }: { index: number, top: 
             </button>
             <ul className='dropdown-menu'>
                 {keys.map(key => {
-                    return <li><a className={`dropdown-item ${data.notes[index] == key && 'active'}`} onClick={() => handleClick(key as NoteResult)}>{key}</a></li>
+                    return <li key={key}><a className={`dropdown-item ${data.notes[index] == key && 'active'}`} onClick={() => handleClick(key as NoteResult)}>{key}</a></li>
                 })}
             </ul>
         </div>

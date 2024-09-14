@@ -47,7 +47,7 @@ export default function CheckData() {
                                     if ((Object.values(data)[index] == null || Object.values(data)[index] == '') && required.get(key)) {
                                         missing.push('')
                                         return (
-                                            <li className='text-left'>{key}</li>
+                                            <li className='text-left' key={key}>{key}</li>
                                         )
                                     }
                                 })}

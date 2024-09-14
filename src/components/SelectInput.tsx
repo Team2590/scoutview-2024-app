@@ -18,7 +18,7 @@ export default function SelectInput({ property, label, options }: { property: ke
                     const border = index == 0 ? 'rounded-end-0' : index == options.length - 1 ? 'rounded-start-0' : 'rounded-0'
                     const active = data[property] == option ? 'active' : ''
                     return (
-                        <button className={`btn btn-primary px-5 py-4 ${border} ${active}`} onClick={() => handleClick(option)}>{option}</button>
+                        <button className={`btn btn-primary px-5 py-4 ${border} ${active}`} onClick={() => handleClick(option)} key={option}>{option}</button>
                     )
                 })}
             </div>

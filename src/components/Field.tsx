@@ -25,7 +25,7 @@ export default function Field() {
         <>
             <div className='mx-auto position-relative'>
                 {btnPositions.map(({ top, left }, i) => {
-                    return <FieldButton top={top} left={left} index={i} />
+                    return <FieldButton top={top} left={left} index={i} key={i} />
                 })}
                 <img src='field.jpg' alt='Field Image' className='d-block mx-auto mt-5 img-fluid' />
             </div>

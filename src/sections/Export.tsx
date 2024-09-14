@@ -50,10 +50,6 @@ export default function Export() {
 
     console.log(exportData)
 
-    // useEffect(() => {
-    //     console.log(JSON.stringify(exportData))
-    // }, [data])
-
     return (
         <SectionWrapper label='Export'>
             <div style={{ minHeight: 'calc(529px + 5rem)' }}>
