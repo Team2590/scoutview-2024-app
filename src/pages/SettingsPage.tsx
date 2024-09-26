@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { useAtom } from 'jotai'
 import { dataAtom } from '../data'
+import { useRegisterSW } from 'virtual:pwa-register/react'
 
 const fetcher = async (url: string) => {
     return fetch(url,
@@ -27,6 +28,7 @@ export default function SettingsPage() {
     const [data, setData] = useAtom(dataAtom)
     const [haveTeams, setHaveTeams] = useLocalStorage('have-teams', false)
     const navigate = useNavigate()
+    const { updateServiceWorker } = useRegisterSW()
 
     useEffect(() => {
         if (autoIncrementMatches && data.matchNum == '') {
@@ -106,6 +108,10 @@ export default function SettingsPage() {
         if (confirm('Reset past data?')) localStorage.removeItem('nemesis-past-data')
     }
 
+    const updateApp = () => {
+        if (confirm('Update service worker?')) updateServiceWorker(true)
+    }
+
     return (
         <>
             <div className='ms-2 mt-1'>
@@ -122,8 +128,9 @@ export default function SettingsPage() {
                             <button className='btn btn-tertiary mb-3' onClick={resetCount}>Reset Match Count</button>
                             <button className='btn btn-tertiary mb-3' onClick={clearLocalStorage}>Clear Local Storage</button>
                         </div>
-                        <div className='text-center'>
+                        <div className='d-flex justify-content-evenly'>
                             <button className='btn btn-tertiary mb-3' onClick={resetPastData}>Reset Past Data</button>
+                            <button className='btn btn-tertiary mb-3' onClick={updateApp}>Update App</button>
                         </div>
                         <div className='form-check form-switch d-flex align-items-center gap-2 mb-3'>
                             <input className='form-check-input' type='checkbox' role='switch' id='auto-increment' checked={autoIncrementMatches} onChange={e => {

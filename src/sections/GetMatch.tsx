@@ -16,7 +16,7 @@ export default function GetMatch() {
     }, [data.matchNum])
 
     return (
-        <SectionWrapper label='Get Match'>
+        <SectionWrapper label='asdasdasd'>
             <div className='d-flex flex-column gap-4 mx-auto mt-5 container'>
                 <TextInput property='scoutName' label='Scout Name' />
                 <TextInput property='teamNum' label='Team Number' />
