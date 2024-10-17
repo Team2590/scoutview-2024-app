@@ -1,20 +1,23 @@
-import { useLayoutEffect, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import SectionWrapper from '../components/SectionWrapper'
 import YesNo from '../components/YesNo'
 import SelectInput from '../components/SelectInput'
 import PlusMinus from '../components/PlusMinus'
 import Field from '../components/Field'
+import { useAtom } from 'jotai'
+import { dataAtom } from '../data'
 
 export default function Autonomous() {
     const [cols, setCols] = useState(true)
+    const [data, setData] = useAtom(dataAtom)
 
-    const changeButtonOrientation = () => {
+    const changeButtonOrientation = useCallback(() => {
         if (window.innerWidth < 1080) {
             setCols(false)
         } else {
             setCols(true)
         }
-    }
+    }, [])
 
     useLayoutEffect(() => {
         changeButtonOrientation()
@@ -27,6 +30,22 @@ export default function Autonomous() {
         }
     }, [])
 
+    useEffect(() => {
+        setData(prev => {
+            let spkrMade_atn = 0
+            let spkrMissed_atn = 0
+            prev.notes.map(value => {
+                if (value == 'Made') spkrMade_atn++
+                if (value == 'Missed') spkrMissed_atn++
+            })
+            return {
+                ...prev,
+                spkrMade_atn,
+                spkrMissed_atn
+            }
+        })
+    }, [data.notes])
+
     return (
         <SectionWrapper label='Autonomous'>
             <div className='container mx-auto'>
@@ -38,11 +57,6 @@ export default function Autonomous() {
                     <div className='col mx-auto mt-md-5 mt-lg-0'>
                         <YesNo property='leaveWing' label='Leave Start Line?' />
                     </div>
-                </div>
-                <div className='input-row mt-5'>
-                    <PlusMinus property='spkrMade_atn' label='Speaker Scored' />
-                    <img src='speaker.png' alt='Speaker Image' className='d-block mx-auto' style={{ maxHeight: 200 }} />
-                    <PlusMinus property='spkrMissed_atn' label='Speaker Missed' />
                 </div>
                 <div className='input-row my-5'>
                     <PlusMinus property='ampMade_atn' label='Amp Made' />

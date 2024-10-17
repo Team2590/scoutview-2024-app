@@ -7,7 +7,6 @@ export default defineConfig({
     plugins: [
         react(),
         VitePWA({
-            registerType: 'prompt',
             workbox: {
                 globPatterns: ['**/*'],
                 cleanupOutdatedCaches: true

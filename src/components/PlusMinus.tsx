@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useAtom } from 'jotai'
 import { dataAtom } from '../data'
 
@@ -7,16 +7,16 @@ const buttonStyles: React.CSSProperties = { width: 78, height: 78 }
 export default function PlusMinus({ property, label }: { property: keyof Data, label: string }) {
     const [data, setData] = useAtom(dataAtom)
 
-    const increment = () => {
+    const increment = useCallback(() => {
         setData(prevData => {
             return {
                 ...prevData,
                 [property]: prevData[property] as number + 1
             }
         })
-    }
+    }, [])
 
-    const decrement = () => {
+    const decrement = useCallback(() => {
         setData(prevData => {
             const current = prevData[property] as number
             const val = current - 1 > 0 ? current - 1 : 0
@@ -26,7 +26,7 @@ export default function PlusMinus({ property, label }: { property: keyof Data, l
                 [property]: val
             }
         })
-    }
+    }, [])
 
     return (
         <div className='text-center'>
