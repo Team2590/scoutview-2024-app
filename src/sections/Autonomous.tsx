@@ -34,7 +34,9 @@ export default function Autonomous() {
         setData(prev => {
             let spkrMade_atn = 0
             let spkrMissed_atn = 0
-            prev.notes.map(value => {
+            if (prev.preloadNote == 'Made') spkrMade_atn++
+            if (prev.preloadNote == 'Missed') spkrMissed_atn++
+            prev.notes.forEach(value => {
                 if (value == 'Made') spkrMade_atn++
                 if (value == 'Missed') spkrMissed_atn++
             })
@@ -44,7 +46,7 @@ export default function Autonomous() {
                 spkrMissed_atn
             }
         })
-    }, [data.notes])
+    }, [data.notes, data.preloadNote])
 
     return (
         <SectionWrapper label='Autonomous'>
