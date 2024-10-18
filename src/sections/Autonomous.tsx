@@ -40,6 +40,8 @@ export default function Autonomous() {
                 if (value == 'Made') spkrMade_atn++
                 if (value == 'Missed') spkrMissed_atn++
             })
+            spkrMade_atn -= prev.ampMade_atn
+            spkrMissed_atn -= prev.ampMissed_atn
             return {
                 ...prev,
                 spkrMade_atn,
