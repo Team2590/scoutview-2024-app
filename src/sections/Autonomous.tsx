@@ -42,13 +42,15 @@ export default function Autonomous() {
             })
             spkrMade_atn -= prev.ampMade_atn
             spkrMissed_atn -= prev.ampMissed_atn
+            if (spkrMade_atn < 0) spkrMade_atn = 0
+            if (spkrMissed_atn < 0) spkrMissed_atn = 0
             return {
                 ...prev,
                 spkrMade_atn,
                 spkrMissed_atn
             }
         })
-    }, [data.notes, data.preloadNote])
+    }, [data.notes, data.preloadNote, data.ampMade_atn, data.ampMissed_atn])
 
     return (
         <SectionWrapper label='Autonomous'>
